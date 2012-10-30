@@ -6,7 +6,7 @@ import os
 from glob import glob
 
 from math import pi
-from numpy import array, zeros, sqrt, cos, sin, radians, log10
+from numpy import array, zeros, sqrt, cos, sin, radians, log10, arcsin, degrees
 from numpy import float as numpy_float
 
 from openmdao.lib.datatypes.api import Int, Float, Array, Enum
@@ -14,7 +14,6 @@ from openmdao.lib.components.api import ExternalCode
 from openmdao.main.api import VariableTree, Slot
 from openmdao.units import add_unit
 from openmdao.util.filewrap import InputFileGenerator, FileParser
-from openmdao.util.namelist_util import Namelist
 
 from geometry import Geometry
 from MEflows import MEflows
@@ -139,6 +138,8 @@ class HSRNOISE(ExternalCode):
         self.SPOKE = self.geo_in.Num_Lobes
         self.HMIC = self.ALTEVO-10*cos(radians(self.phi))
         self.SL = 10*sin(radians(self.phi))
+
+        self.EJLIN = self.LinFrac*self.geo_in.length
         
     def execute(self):
         """ Executes our file-wrapped component. """
@@ -165,8 +166,6 @@ class HSRNOISE(ExternalCode):
         
     def generate_input(self):
         """Creates the HSRNOISE input file."""
-        
-        self.EJLIN = self.LinFrac*self.geo_in.length
         
         parser = InputFileGenerator()
         parser.set_template_file('hsr_template.input')
@@ -269,8 +268,84 @@ class HSRNOISE(ExternalCode):
         self.TotalMaxPNLT = outfile.transfer_var(9, 5)
         self.JetEPNL = outfile.transfer_var(8, 2)
     
-    def load_model(self):
+    def load_model(self, filename="test.input"):
         """Loads an existing HSRNOISE input file."""
+       
+        infile = FileParser()
+        infile.set_file(filename)
+        
+        infile.mark_anchor('$GEOM')
+        self.HMIC = float(infile.transfer_keyvar("HMIC", 2))
+        self.SL = float(infile.transfer_keyvar("SL", 2))
+        infile.mark_anchor('$FLIPATH')
+        self.ALTEVO = float(infile.transfer_keyvar("ALTEVO", 2))
+            
+        self.HMIC = int(infile.transfer_keyvar("JETMETHOD", 2))
+        
+        infile.mark_anchor('$JET1IN')
+        self.geo_in.Apri = float(infile.transfer_keyvar("APRI", 2))
+        self.geo_in.Asec = float(infile.transfer_keyvar("ASEC", 2))
+        self.ATHP = float(infile.transfer_keyvar("ATHP", 2))
+        self.DELMIX = float(infile.transfer_keyvar("DELMIX", 2))
+        self.DELPE = float(infile.transfer_keyvar("DELPE", 2))
+        self.DELPI = float(infile.transfer_keyvar("DELPI", 2))
+        self.geo_in.ChuteAngles = float(infile.transfer_keyvar("DIVANG", 2))
+        self.geo_in.AR = float(infile.transfer_keyvar("EJASP", 2))
+        self.EJD = float(infile.transfer_keyvar("EJD", 2))
+        self.geo_in.length = float(infile.transfer_keyvar("EJL", 2))
+        self.EJLIN = float(infile.transfer_keyvar("EJLIN", 2))
+        self.FLIN = float(infile.transfer_keyvar("FLIN", 2))
+        self.geo_in.LhMh = float(infile.transfer_keyvar("PEN", 2))
+        self.PLUGD = float(infile.transfer_keyvar("PLUGD", 2))
+        self.PSI0 = float(infile.transfer_keyvar("PSI0", 2))
+        self.SPOKE = float(infile.transfer_keyvar("SPOKE", 2))
+        self.flow_in.pri.Tt = float(infile.transfer_keyvar("TPRI", 2))
+        self.flow_in.sec.Tt = float(infile.transfer_keyvar("TSEC", 2))
+        self.flow_in.pri.Vel = float(infile.transfer_keyvar("VPRI", 2))
+        self.flow_in.sec.Vel = float(infile.transfer_keyvar("VSEC", 2))
+        self.flow_in.pri.W = float(infile.transfer_keyvar("WPRI", 2))
+        self.flow_in.sec.W = float(infile.transfer_keyvar("WSEC", 2))
+        self.geo_in.AeAt = float(infile.transfer_keyvar("XMAR", 2))
+        
+        infile.mark_anchor('$JET2IN')
+        self.APT = float(infile.transfer_keyvar("APT", 2))
+        self.AS = float(infile.transfer_keyvar("AS", 2))
+        self.CER = float(infile.transfer_keyvar("CER", 2))
+        self.DHP = float(infile.transfer_keyvar("DHP", 2))
+        self.DL = float(infile.transfer_keyvar("DL", 2))
+        self.DM = float(infile.transfer_keyvar("DM", 2))
+        self.FPK = float(infile.transfer_keyvar("FPK", 2))
+        self.GAMMAC = float(infile.transfer_keyvar("GAMMAC", 2))
+        self.HEX = float(infile.transfer_keyvar("HEX", 2))
+        self.IEX = int(infile.transfer_keyvar("IEX", 2))
+        self.ISUPPR = int(infile.transfer_keyvar("ISUPPR", 2))
+        self.LBE = float(infile.transfer_keyvar("LBE", 2))
+        self.LBS = float(infile.transfer_keyvar("LBS", 2))
+        self.LE = float(infile.transfer_keyvar("LE", 2))
+        self.LPE = float(infile.transfer_keyvar("LPE", 2))
+        self.LPS = float(infile.transfer_keyvar("LPS", 2))
+        self.MMC = float(infile.transfer_keyvar("MMC", 2))
+        self.MPD = float(infile.transfer_keyvar("MPD", 2))
+        self.PC = float(infile.transfer_keyvar("PC", 2))
+        self.PEN = float(infile.transfer_keyvar("PEN", 2))
+        self.SAR = float(infile.transfer_keyvar("SAR", 2))
+        self.SUPPK = float(infile.transfer_keyvar("SUPPK", 2))
+        self.TC = float(infile.transfer_keyvar("TC", 2))
+        self.TEX = float(infile.transfer_keyvar("TEX", 2))
+        self.VEX = float(infile.transfer_keyvar("VEX", 2))
+        self.WEX = float(infile.transfer_keyvar("WEX", 2))
+        self.WSWP = float(infile.transfer_keyvar("WSWP", 2))
+        
+        # Set derived values down in the variable trees.
+        self.LinFrac = self.EJLIN/self.geo_in.length
+        self.phi = degrees(arcsin(0.1*self.SL))
+        self.geo_in.Num_Lobes = self.SPOKE
+        self.geo_in.Aexit = pi*(0.5*self.EJD)**2
+        self.flow_in.gamma = self.GAMMAC
+        
+        # Note, not solvable for Mach?
+        #self.ATHP = self.geo_in.Apri/(((self.flow_in.gamma+1)/2)**((-self.flow_in.gamma-1)/(2*(self.flow_in.gamma-1)))*(1+(self.flow_in.gamma-1)/2*self.flow_in.pri.Mach**2)**((self.flow_in.gamma+1)/(2*(self.flow_in.gamma-1)))/self.flow_in.pri.Mach)
+        
         
 if __name__ == "__main__":
     MyComp = HSRNOISE()
