@@ -1,0 +1,192 @@
+#
+#  Approach test case for the HSRNOISE code
+#   
+#  Full system predictions with Deltas
+#
+ $GEOM
+   HMIC    =  0.0       ,
+   SL      =  0.0
+ $END
+ $WEATHER
+   PSIAMB  =   14.7     ,
+   RH      =   70.0     ,
+   TFAMB   =   77.0     , 
+   SIGMA   =  1.1E6
+ $END
+ $FLIPATH
+   ALTEVO  =   10.0    ,
+   FPA     =   0.0    ,
+   PAE     =   0.0    ,
+   VAIR    =   0.0    
+ $END
+ $SOURCE
+   IAFRAM  = F,
+   IATM    = 0,
+   IDELTA  = T,
+   IEGA    = F,
+   IGRND   = F,
+   IFAN    = T,
+   ICORE   = T,
+   IJET    = T,
+   IJETSHLD = F,
+   JETMETHOD    = 1   ,
+   ITUR    = T,
+   NENG    = 1
+ $END
+ $DELTAS
+   FANDIBB = 17*-8.5 ,
+   FANSPBB = 24*1.0  ,
+   FANBPF  =   -8.5  ,
+   FAN2BPF =   -8.5  ,
+   FAN3BPF =   -8.5  ,
+   FAN4BPF =   -8.5  ,
+   CORDIBB = 17*0.0 ,
+   CORSPBB = 24*0.0 ,
+   TURDIBB = 17*0.0 ,
+   TURSPBB = 24*0.0  ,
+   TURDITN = 17*0.0 ,
+   TURSPTN = 24*0.0 ,
+   AIRFDICW   =  8*1.4, 1.0, 0.7, 0.5, 0.3, 0.0, -0.2, -0.5, -0.8, -1.0,
+   AIRFSPCW   =  -12., -11., -10., -9., 2*-8., -9., 
+                 -9.5, 3*-9., 3*-10., 9*-9.0, -8.0,
+   AIRFDILE   =  8*1.4, 1.0, 0.7, 0.5, 0.3, 0.0, -0.2, -0.5, -0.8, -1.0,
+   AIRFSPLE   =  -12., -11., -10., -9., 2*-8., -9., 
+                 -9.5, 3*-9., 3*-10., 9*-9.0, -8.0,
+   AIRFDITEI  =  8*1.4, 1.0, 0.7, 0.5, 0.3, 0.0, -0.2, -0.5, -0.8, -1.0,
+   AIRFSPTEI  =  -12., -11., -10., -9., 2*-8., -9., 
+                 -9.5, 3*-9., 3*-10., 9*-9.0, -8.0,
+   AIRFDITEO  =  8*1.4, 1.0, 0.7, 0.5, 0.3, 0.0, -0.2, -0.5, -0.8, -1.0,
+   AIRFSPTEO  =  -12., -11., -10., -9., 2*-8., -9., 
+                 -9.5, 3*-9., 3*-10., 9*-9.0, -8.0,
+   AIRFDIHT   =  8*1.4, 1.0, 0.7, 0.5, 0.3, 0.0, -0.2, -0.5, -0.8, -1.0,
+   AIRFSPHT   =  -12., -11., -10., -9., 2*-8., -9., 
+                 -9.5, 3*-9., 3*-10., 9*-9.0, -8.0,
+   AIRFDIVT   =  8*1.4, 1.0, 0.7, 0.5, 0.3, 0.0, -0.2, -0.5, -0.8, -1.0,
+   AIRFSPVT   =  -12., -11., -10., -9., 2*-8., -9., 
+                 -9.5, 3*-9., 3*-10., 9*-9.0, -8.0,
+   AIRFDIMG   =  17*0.0,
+   AIRFSPMG   =  24*0.0,
+   AIRFDING   =  17*0.0,
+   AIRFSPNG   =  24*0.0
+ $END
+ $FANIN
+   AFAN    =   16.98436  ,
+   FANRPM  =   3609.0    ,
+   NB1     =   27        ,
+   UT      =   923.13    ,
+   ISHAPE  =   1         ,
+   IDOOR   =   0                 
+ $END
+ $COREIN
+   AB      =   1111.27  ,
+   BL      =   0.75     ,
+   ICR     =   2        ,
+   NFN     =   90       ,
+   PLD     =    0.15    ,
+   P3      =   92.0     ,
+   P4      =   85.2     ,
+   P7      =   20.28    ,
+   T3      =   940.7    ,
+   T4      =   1880.5   ,
+   T7      =   1201.5   ,
+   W3      =   141.2    ,
+   WFP4    =  3.9999999E-02
+ $END
+ $TURIN
+   CSS     =   151.42    ,
+   MDOT    =   200.20    ,
+   NBLADE  =   88        ,
+   TS      =   1172.34   ,
+   TURCAL  =     10.0    ,
+   TURRPM  =   3609.0    ,
+   VTR     =   937.8076    
+ $END
+ $JET1IN
+   APRI    =   8.476     ,
+   ASEC    =   12.352    ,
+   ATHP    =   7.474     ,
+   CFG     =   0.95   ,
+   DELMIX  =   0.1 ,
+   DELPE   =   0.2 ,
+   DELPI   =  -1.0 ,
+   DIVANG  =   0.0    ,
+   EJASP   =   1.42   ,
+   EJD     =   5.15   ,
+   EJL     =   11.0   ,
+   EJLIN   =   7.09   ,
+   FLIN    =   2500.0 ,
+   PEN     =   0.925  ,
+   PLUGD   =   0.0       ,
+   PSI0    =   0.0    ,
+   SPOKE   =   20. ,
+   TPRI    =   989.84    ,
+   TSEC    =   514.51    ,
+   VPRI    =   1048.88   ,
+   VSEC    =   369.42    ,
+   WPRI    =   327.87    ,
+   WSEC    =   316.23    ,
+   XMAR    =   0.98
+ $END
+ $JET2IN
+   APT     =   8.5466  ,
+   AS      =   16.832  ,
+   CER     =   1     ,
+   DHP     =   0.5   ,
+   DL      =   0.7   ,
+   DM      =   0     ,
+   FPK     =   1995  ,
+   GAMMAC  =   0.    ,
+   HEX     =   4.0   ,
+   IEX     =   0     ,
+   ISUPPR  =   0     ,
+   LBE     =   10.   ,
+   LBS     =   0.    ,
+   LE      =   10.   ,
+   LPE     =   0.    ,
+   LPS     =   0.    ,
+   MMC     =   0.    ,
+   MPD     =   1.2   ,
+   PC      =   14.7  ,
+   PEN     =   0.925 ,
+   SAR     =   1.    ,
+   SUPPK   =   1.6628  ,
+   TC      =   1000. ,
+   TEX     =   800.  ,
+   VEX     =   700.  ,
+   WEX     =   6.0   ,
+   WSWP    =   1.
+ $END
+ $AIRFIN
+   ICWING = 2,
+   IVTAIL = 1,
+   IHTAIL = 1,
+   ILEDGE = 1,
+   ITEIN  = 1,
+   ITEOUT = 1,
+   INGEAR = 1,
+   IMGEAR = 1,
+   AW = 8878.0,
+   BW = 154.3,
+   AV = 435.0,
+   BV = 16.8,
+   AH = 726.0,
+   BH = 71.0,
+   AFIN = 100.0,
+   BFIN = 10.0,
+   FLAIN = 10.0,
+   NFSIN = 1,
+   AFOUT = 200.0,
+   BFOUT = 20.0,
+   FLAOUT = 10.0,
+   NFSOUT = 1,
+   NNG = 1,
+   NWNG = 2,
+   DNG = 3.3,
+   RLNG = 13.7,
+   NMG = 2,
+   NWMG = 8,
+   DMG = 3.7,
+   RLMG = 16.0,
+ $END
+ 
+
