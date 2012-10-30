@@ -11,13 +11,11 @@ from numpy import float as numpy_float
 
 from openmdao.lib.datatypes.api import Int, Float, Array, Enum
 from openmdao.lib.components.api import ExternalCode
-
+from openmdao.main.api import VariableTree, Slot
 from openmdao.units import add_unit
-#from openmdao.util.namelist_util import Namelist
-
-# The following will be used for file wrapping, see the next sections
-from openmdao.main.api import FileMetadata, VariableTree, Slot
 from openmdao.util.filewrap import InputFileGenerator, FileParser
+from openmdao.util.namelist_util import Namelist
+
 from geometry import Geometry
 from MEflows import MEflows
 
@@ -132,14 +130,20 @@ class HSRNOISE(ExternalCode):
         self.add('geo_in', Geometry())
         self.add('flow_in', MEflows())
 
-    def execute(self):
-        """ Executes our file-wrapped component. """
-
+    def setup(self):
+        """ Uses some values in our variable tables to fill in some derived
+        paramters needed by HSR_Noise. This is application-specific."""
+        
         self.ATHP = self.geo_in.Apri/(((self.flow_in.gamma+1)/2)**((-self.flow_in.gamma-1)/(2*(self.flow_in.gamma-1)))*(1+(self.flow_in.gamma-1)/2*self.flow_in.pri.Mach**2)**((self.flow_in.gamma+1)/(2*(self.flow_in.gamma-1)))/self.flow_in.pri.Mach)
         self.EJD = 2*(self.geo_in.Aexit/pi)**0.5
         self.SPOKE = self.geo_in.Num_Lobes
         self.HMIC = self.ALTEVO-10*cos(radians(self.phi))
         self.SL = 10*sin(radians(self.phi))
+        
+    def execute(self):
+        """ Executes our file-wrapped component. """
+
+        self.setup()
         
         #Prepare the input file for HSRNOISE
         self.generate_input()
@@ -165,7 +169,7 @@ class HSRNOISE(ExternalCode):
         self.EJLIN = self.LinFrac*self.geo_in.length
         
         parser = InputFileGenerator()
-        parser.set_template_file('test_temp.input')
+        parser.set_template_file('hsr_template.input')
         parser.set_generated_file('test.input')
         
         # Set Geometry and Flight Conditions

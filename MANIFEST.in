@@ -1,3 +1,6 @@
 graft src/hsrnoise_wrapper/sphinx_build/html
+recursive-include src/hsrnoise_wrapper *.input
 recursive-include src/hsrnoise_wrapper/test *.py
+recursive-include src/hsrnoise_wrapper/test *.input
+recursive-include src/hsrnoise_wrapper/test *.output
 

@@ -6,23 +6,24 @@
 
 from setuptools import setup, find_packages
 
-kwargs = {'author': '',
- 'author_email': '',
+kwargs = {'author': 'Eric Hendricks',
+ 'author_email': 'eric.hendricks@nasa.gov',
  'classifiers': ['Intended Audience :: Science/Research',
                  'Topic :: Scientific/Engineering'],
- 'description': '',
+ 'description': 'OpenMDAO component wrapper for HSR_Noise',
  'download_url': '',
+ 'entry_points': '[openmdao.container]\nhsrnoise_wrapper.geometry.Geometry=hsrnoise_wrapper.geometry:Geometry\nhsrnoise_wrapper.hsrnoise.HSRNOISE=hsrnoise_wrapper.hsrnoise:HSRNOISE\nhsrnoise_wrapper.MEflows.MEflows=hsrnoise_wrapper.MEflows:MEflows\nhsrnoise_wrapper.stream.Stream=hsrnoise_wrapper.stream:Stream\n\n[openmdao.component]\nhsrnoise_wrapper.hsrnoise.HSRNOISE=hsrnoise_wrapper.hsrnoise:HSRNOISE',
  'include_package_data': True,
  'install_requires': ['openmdao.main'],
  'keywords': ['openmdao'],
- 'license': '',
- 'maintainer': '',
- 'maintainer_email': '',
+ 'license': 'Apache License, Version 2.0',
+ 'maintainer': 'Kenneth Moore',
+ 'maintainer_email': 'kenneth.t.moore-1@nasa.gov',
  'name': 'hsrnoise_wrapper',
  'package_data': {'hsrnoise_wrapper': []},
  'package_dir': {'': 'src'},
  'packages': ['hsrnoise_wrapper'],
- 'url': '',
+ 'url': 'https://github.com/OpenMDAO-Plugins/hsrnoise_wrapper',
  'version': '0.1',
  'zip_safe': False}
 

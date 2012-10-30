@@ -3,6 +3,10 @@
 Package Metadata
 ================
 
+- **author:** Eric Hendricks
+
+- **author-email:** eric.hendricks@nasa.gov
+
 - **classifier**:: 
 
     Intended Audience :: Science/Research
@@ -10,7 +14,25 @@ Package Metadata
 
 - **description-file:** README.txt
 
+- **entry_points**:: 
+
+    [openmdao.container]
+    hsrnoise_wrapper.geometry.Geometry=hsrnoise_wrapper.geometry:Geometry
+    hsrnoise_wrapper.hsrnoise.HSRNOISE=hsrnoise_wrapper.hsrnoise:HSRNOISE
+    hsrnoise_wrapper.MEflows.MEflows=hsrnoise_wrapper.MEflows:MEflows
+    hsrnoise_wrapper.stream.Stream=hsrnoise_wrapper.stream:Stream
+    [openmdao.component]
+    hsrnoise_wrapper.hsrnoise.HSRNOISE=hsrnoise_wrapper.hsrnoise:HSRNOISE
+
+- **home-page:** https://github.com/OpenMDAO-Plugins/hsrnoise_wrapper
+
 - **keywords:** openmdao
+
+- **license:** Apache License, Version 2.0
+
+- **maintainer:** Kenneth Moore
+
+- **maintainer-email:** kenneth.t.moore-1@nasa.gov
 
 - **name:** hsrnoise_wrapper
 
@@ -22,6 +44,8 @@ Package Metadata
     <3.0
 
 - **static_path:** [ '_static' ]
+
+- **summary:** OpenMDAO component wrapper for HSR_Noise
 
 - **version:** 0.1
 
