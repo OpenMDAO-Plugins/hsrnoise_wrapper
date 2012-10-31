@@ -13,7 +13,9 @@ class Hsrnoise_wrapperTestCase(unittest.TestCase):
         pass
         
     def tearDown(self):
-        pass
+        for filename in ['test.input', 'test.output', 'hsr.dump']:
+            if os.path.exists(filename):
+                os.remove(filename)
         
     def test_Hsrnoise_wrapper(self):
         
@@ -43,7 +45,9 @@ class Hsrnoise_wrapperTestCase(unittest.TestCase):
             # Check output file parsing
                 
             shutil.copyfile('base.output', 'test.output')
+            print comp.SPL
             comp.parse_output()
+            print comp.SPL
             
             file1 = open('hsr.dump', 'w')
             dump(comp, stream=file1, recurse=True)
