@@ -34,7 +34,7 @@ class Hsrnoise_wrapperTestCase(unittest.TestCase):
             file1 = open('base.input', 'r')
             result1 = file1.read()
             file1.close()
-            file1 = open('test.input', 'r')
+            file2 = open('test.input', 'r')
             result2 = file2.read()
             file2.close()
             
@@ -42,17 +42,17 @@ class Hsrnoise_wrapperTestCase(unittest.TestCase):
             
             # Check output file parsing
                 
-            shutil.copyfile('base_ejectd.out', 'ejectd.out')
-            comp.parse_output('Subsonic')
+            shutil.copyfile('base.output', 'test.output')
+            comp.parse_output()
             
-            file1 = open('drea.dump', 'w')
+            file1 = open('hsr.dump', 'w')
             dump(comp, stream=file1, recurse=True)
             file1.close()
             
-            file1 = open('base_drea.dump', 'r')
+            file1 = open('base_hsr.dump', 'r')
             result1 = file1.readlines()
             file1.close()
-            file2 = open('drea.dump', 'r')
+            file2 = open('hsr.dump', 'r')
             result2 = file2.readlines()
             file2.close()
             

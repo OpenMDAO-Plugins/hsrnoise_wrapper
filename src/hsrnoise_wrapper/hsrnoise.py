@@ -341,10 +341,24 @@ class HSRNOISE(ExternalCode):
         self.phi = degrees(arcsin(0.1*self.SL))
         self.geo_in.Num_Lobes = self.SPOKE
         self.geo_in.Aexit = pi*(0.5*self.EJD)**2
-        self.flow_in.gamma = self.GAMMAC
         
-        # Note, not solvable for Mach?
-        #self.ATHP = self.geo_in.Apri/(((self.flow_in.gamma+1)/2)**((-self.flow_in.gamma-1)/(2*(self.flow_in.gamma-1)))*(1+(self.flow_in.gamma-1)/2*self.flow_in.pri.Mach**2)**((self.flow_in.gamma+1)/(2*(self.flow_in.gamma-1)))/self.flow_in.pri.Mach)
+        # Where does gamma come from?
+        self.flow_in.gamma = 1.4
+        
+        # use fixed-point iteration to solve for mach 
+        mach = 1.0
+        gam = self.flow_in.gamma
+        apri = self.geo_in.Apri
+        athp = self.ATHP
+        
+        term1 = ((gam+1)/2)**((-gam-1)/(2*(gam-1)))
+        exp1 = ((gam+1)/(2*(gam-1)))
+        
+        for i in range(135):
+            mach = athp/(apri/(term1*(1+(gam-1)/2*mach**2)**exp1))
+            
+        
+        self.flow_in.pri.Mach = mach
         
         
 if __name__ == "__main__":

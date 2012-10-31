@@ -4,8 +4,8 @@
 #  Full system predictions with Deltas
 #
  $GEOM
-   HMIC    =  1000.0       ,
-   SL      =  10.0
+   HMIC    =  0.0       ,
+   SL      =  0.0
  $END
  $WEATHER
    PSIAMB  =   14.7     ,
@@ -14,7 +14,7 @@
    SIGMA   =  1.1E6
  $END
  $FLIPATH
-   ALTEVO  =   1000.0    ,
+   ALTEVO  =   10.0    ,
    FPA     =   0.0    ,
    PAE     =   0.0    ,
    VAIR    =   0.0    
@@ -102,59 +102,59 @@
    VTR     =   937.8076    
  $END
  $JET1IN
-   APRI    =   12.0     ,
-   ASEC    =   21.0    ,
-   ATHP    =   11.7540049057412     ,
+   APRI    =   8.476     ,
+   ASEC    =   12.352    ,
+   ATHP    =   7.474     ,
    CFG     =   0.95   ,
-   DELMIX  =   0.0 ,
-   DELPE   =   0.0 ,
-   DELPI   =  0.0 ,
-   DIVANG  =   10.0    ,
-   EJASP   =   3.0   ,
-   EJD     =   6.317915774007069   ,
-   EJL     =   8.0   ,
-   EJLIN   =   7.2   ,
-   FLIN    =   2000.0 ,
-   PEN     =   0.9  ,
+   DELMIX  =   0.1 ,
+   DELPE   =   0.2 ,
+   DELPI   =  -1.0 ,
+   DIVANG  =   0.0    ,
+   EJASP   =   1.42   ,
+   EJD     =   5.15   ,
+   EJL     =   11.0   ,
+   EJLIN   =   7.09   ,
+   FLIN    =   2500.0 ,
+   PEN     =   0.925  ,
    PLUGD   =   0.0       ,
    PSI0    =   0.0    ,
-   SPOKE   =   38.4 ,
-   TPRI    =   1070.325524779987    ,
-   TSEC    =   540.0699401249999    ,
-   VPRI    =   1657.42195   ,
-   VSEC    =   589.917548    ,
-   WPRI    =   903.8411150675701    ,
-   WSEC    =   781.86613846067    ,
-   XMAR    =   0.95
+   SPOKE   =   20. ,
+   TPRI    =   989.84    ,
+   TSEC    =   514.51    ,
+   VPRI    =   1048.88   ,
+   VSEC    =   369.42    ,
+   WPRI    =   327.87    ,
+   WSEC    =   316.23    ,
+   XMAR    =   0.98
  $END
  $JET2IN
    APT     =   8.5466  ,
    AS      =   16.832  ,
-   CER     =   0.0     ,
+   CER     =   1     ,
    DHP     =   0.5   ,
    DL      =   0.7   ,
-   DM      =   0.0     ,
-   FPK     =   1995.0  ,
-   GAMMAC  =   0.0    ,
+   DM      =   0     ,
+   FPK     =   1995  ,
+   GAMMAC  =   0.    ,
    HEX     =   4.0   ,
    IEX     =   0     ,
    ISUPPR  =   0     ,
-   LBE     =   10.0   ,
-   LBS     =   0.0    ,
-   LE      =   10.0   ,
-   LPE     =   0.0    ,
-   LPS     =   0.0    ,
-   MMC     =   0.0    ,
+   LBE     =   10.   ,
+   LBS     =   0.    ,
+   LE      =   10.   ,
+   LPE     =   0.    ,
+   LPS     =   0.    ,
+   MMC     =   0.    ,
    MPD     =   1.2   ,
-   PC      =   0.0  ,
+   PC      =   14.7  ,
    PEN     =   0.925 ,
-   SAR     =   0.0    ,
+   SAR     =   1.    ,
    SUPPK   =   1.6628  ,
-   TC      =   0.0 ,
-   TEX     =   0.0  ,
-   VEX     =   0.0  ,
+   TC      =   1000. ,
+   TEX     =   800.  ,
+   VEX     =   700.  ,
    WEX     =   6.0   ,
-   WSWP    =   0.0
+   WSWP    =   1.
  $END
  $AIRFIN
    ICWING = 2,
