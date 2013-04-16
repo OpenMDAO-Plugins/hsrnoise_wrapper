@@ -33,14 +33,21 @@ class Hsrnoise_wrapperTestCase(unittest.TestCase):
             comp.setup()
             comp.generate_input()
     
-            file1 = open('base.input', 'r')
-            result1 = file1.read()
-            file1.close()
-            file2 = open('test.input', 'r')
-            result2 = file2.read()
-            file2.close()
+            with open('base.input', 'r') as inp:
+                result1 = inp.read()
+            with open('test.input', 'r') as inp:
+                result2 = inp.read()
             
-            self.assertEqual(result1, result2)
+            lnum = 1
+            for line1, line2 in zip(result1, result2):
+                # Omit lines with objects, because memory location differs
+                if 'object at' not in line1:
+                    try:
+                        self.assertEqual(line1, line2)
+                    except AssertionError as err:
+                        raise AssertionError("line %d doesn't match file %s: %s"
+                                             % (lnum, 'base.input', err))
+                    lnum += 1
             
             # Check output file parsing
                 
@@ -49,21 +56,24 @@ class Hsrnoise_wrapperTestCase(unittest.TestCase):
             comp.parse_output()
             print comp.SPL
             
-            file1 = open('hsr.dump', 'w')
-            dump(comp, stream=file1, recurse=True)
-            file1.close()
+            with open('hsr.dump', 'w') as out:
+                dump(comp, stream=out, recurse=True)
             
-            file1 = open('base_hsr.dump', 'r')
-            result1 = file1.readlines()
-            file1.close()
-            file2 = open('hsr.dump', 'r')
-            result2 = file2.readlines()
-            file2.close()
+            with open('base_hsr.dump', 'r') as inp:
+                result1 = inp.readlines()
+            with open('hsr.dump', 'r') as inp:
+                result2 = inp.readlines()
             
+            lnum = 1
             for line1, line2 in zip(result1, result2):
                 # Omit lines with objects, because memory location differs
                 if 'object at' not in line1:
-                    self.assertEqual(line1, line2)
+                    try:
+                        self.assertEqual(line1, line2)
+                    except AssertionError as err:
+                        raise AssertionError("line %d doesn't match file %s: %s"
+                                             % (lnum, 'base_hsr.dump', err))
+                    lnum += 1
 
         finally:
             os.chdir(basename)
