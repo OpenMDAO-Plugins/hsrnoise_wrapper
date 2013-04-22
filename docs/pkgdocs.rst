@@ -47,5 +47,5 @@ Package Metadata
 
 - **summary:** OpenMDAO component wrapper for HSR_Noise
 
-- **version:** 0.1
+- **version:** 0.2
 
