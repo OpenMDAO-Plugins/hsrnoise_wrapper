@@ -9,9 +9,9 @@ from math import pi
 from numpy import array, zeros, sqrt, cos, sin, radians, log10, arcsin, degrees
 from numpy import float as numpy_float
 
-from openmdao.lib.datatypes.api import Int, Float, Array, Enum
+from openmdao.lib.datatypes.api import Int, Float, Array, Enum, VarTree
 from openmdao.lib.components.api import ExternalCode
-from openmdao.main.api import VariableTree, Slot
+from openmdao.main.api import VariableTree
 from openmdao.units import add_unit
 from openmdao.util.filewrap import InputFileGenerator, FileParser
 
@@ -25,8 +25,8 @@ class HSRNOISE(ExternalCode):
 
     # Variables from MEflows and Geometry variable trees
     # -------------------------
-    flow_in = Slot(MEflows, iotype='in')
-    geo_in = Slot(Geometry, iotype='in')
+    flow_in = VarTree(MEflows(), iotype='in')
+    geo_in = VarTree(Geometry(), iotype='in')
     
     LinFrac = Float(0.9, iotype='in', desc='Fraction of ejector length covered by acoustic liner')
     phi = Float(0.0, iotype='in', units='deg', desc='Roll angle at which noise is estimated')
@@ -126,12 +126,9 @@ class HSRNOISE(ExternalCode):
         super(HSRNOISE,self).__init__()
         self.command = ['hsrnoise', 'test.input', 'test.output']
 
-        self.add('geo_in', Geometry())
-        self.add('flow_in', MEflows())
-
     def setup(self):
         """ Uses some values in our variable tables to fill in some derived
-        paramters needed by HSR_Noise. This is application-specific."""
+        parameters needed by HSR_Noise. This is application-specific."""
         
         self.ATHP = self.geo_in.Apri/(((self.flow_in.gamma+1)/2)**((-self.flow_in.gamma-1)/(2*(self.flow_in.gamma-1)))*(1+(self.flow_in.gamma-1)/2*self.flow_in.pri.Mach**2)**((self.flow_in.gamma+1)/(2*(self.flow_in.gamma-1)))/self.flow_in.pri.Mach)
         self.EJD = 2*(self.geo_in.Aexit/pi)**0.5

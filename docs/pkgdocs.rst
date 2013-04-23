@@ -16,13 +16,13 @@ Package Metadata
 
 - **entry_points**:: 
 
+    [openmdao.component]
+    hsrnoise_wrapper.hsrnoise.HSRNOISE=hsrnoise_wrapper.hsrnoise:HSRNOISE
     [openmdao.container]
     hsrnoise_wrapper.geometry.Geometry=hsrnoise_wrapper.geometry:Geometry
     hsrnoise_wrapper.hsrnoise.HSRNOISE=hsrnoise_wrapper.hsrnoise:HSRNOISE
     hsrnoise_wrapper.MEflows.MEflows=hsrnoise_wrapper.MEflows:MEflows
     hsrnoise_wrapper.stream.Stream=hsrnoise_wrapper.stream:Stream
-    [openmdao.component]
-    hsrnoise_wrapper.hsrnoise.HSRNOISE=hsrnoise_wrapper.hsrnoise:HSRNOISE
 
 - **home-page:** https://github.com/OpenMDAO-Plugins/hsrnoise_wrapper
 
@@ -47,5 +47,5 @@ Package Metadata
 
 - **summary:** OpenMDAO component wrapper for HSR_Noise
 
-- **version:** 0.1
+- **version:** 0.2
 
