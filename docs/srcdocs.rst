@@ -59,3 +59,16 @@ stream.py
    :show-inheritance:
 
         
+.. index:: test_hsrnoise_wrapper.py
+
+.. _hsrnoise_wrapper.test.test_hsrnoise_wrapper.py:
+
+test_hsrnoise_wrapper.py
+------------------------
+
+.. automodule:: hsrnoise_wrapper.test.test_hsrnoise_wrapper
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+        
